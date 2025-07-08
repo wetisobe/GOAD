@@ -1,0 +1,16 @@
+---
+- name: "Sysprep VM to remove duplicate SID-Problems"
+  win_command: C:\Windows\System32\Sysprep\Sysprep.exe /generalize /oobe /mode:vm /unattend:cloudbase-init-unattend.xml /reboot
+  args:
+    chdir: C:\Program Files\Cloudbase Solutions\Cloudbase-Init\conf\
+  ignore_errors: True
+
+- name: Wait 600 seconds for connection to become available, but only start checking after 5 Minutes
+  ansible.builtin.wait_for_connection:
+    delay: 300
+    timeout: 600
+    
+- name: Reboot for host changes
+  win_reboot:
+    reboot_timeout: 900
+    post_reboot_delay: 100

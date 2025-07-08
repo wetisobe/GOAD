@@ -77,6 +77,11 @@ srv03
 dc01
 dc03
 
+; hosts that need to be forced to run sysprep again
+; usage : sysprep.yml
+[sysprep]
+dc02
+
 ; child domain controler (need a fqdn child_name.parent_name)
 ; usage : ad-servers.yml
 [child_dc]
